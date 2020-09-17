@@ -31,6 +31,12 @@ eksctl enable repo \
 * Applies those manifests to deploy them to your cluster in the `flux` namespace
 * Prints Flux's public SSH key for you to add to your repository as a Deploy Key
 
+For this demo, we will be updating Flux's poll interval to 1 minute, by adding an additional argument in `flux/flux-deployment.yaml`
+
+```yaml
+- --git-poll-interval=1m
+```
+
 ## ALB Ingress Controller
 
 For this demo, we'll be deploying an ALB Ingress Controller for our Sock Shop demo Ingress resource.
@@ -38,3 +44,27 @@ For this demo, we'll be deploying an ALB Ingress Controller for our Sock Shop de
 ## Application Demos
 
 In order to demonstrate some sample microservices, we look to open source examples. Today we'll be using Weaveworks' Sock Shop microservice and Stefan Prodan's Podinfo.
+
+### Sock Shop
+
+The manifests for the Sock Shop microservice are included under `demo-apps/sockshop`.
+
+### Podinfo
+
+For our podinfo deployment, we will be very simply demonstrating a HelmRelease.
+
+```yaml
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: podinfo
+  namespace: default
+spec:
+  chart:
+    repository: https://stefanprodan.github.io/podinfo
+    name: podinfo
+    version: 3.2.0
+```
+
+The HelmRelease above specifies usage of the Podinfo Helm Chart, and will deploy our podinfo pod in the default namespace.
