@@ -1,4 +1,4 @@
-# Containers from the Couch: Intro to GitOps
+# Intro to GitOps
 
 The contents of this demo closely follows the Weaveworks + AWS [Introduction to GitOps on EKS](https://weaveworks-gitops.awsworkshop.io/22_workshop_1.html).
 
